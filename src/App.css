@@ -1,0 +1,528 @@
+/*CONFIGURAÇÕES GLOBAIS */
+:root {
+  --bg-color: #050505;        
+  --surface-color: #121212;  
+  --text-primary: #FFFFFF;    
+  --text-secondary: #B0B0B0;  
+  
+  /*Azul Elétrico*/
+  --electric-blue: #00e5ff;   
+  --electric-glow: 0 0 15px rgba(0, 229, 255, 0.4); 
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+main {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* HERO */
+.hero-section {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; 
+  padding-top: 60px;
+}
+
+.hero-section h1 {
+  font-weight: 900; 
+  font-size: clamp(3rem, 8vw, 6rem); 
+  line-height: 1.1;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.hero-section span.highlight {
+  color: var(--electric-blue);
+  text-shadow: var(--electric-glow);
+}
+
+.hero-section p {
+  font-weight: 300;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  border-left: 3px solid var(--electric-blue);
+  padding-left: 20px;
+  margin-bottom: 40px;
+}
+
+.social-links {
+  display: flex;
+  gap: 20px;
+}
+
+.social-links a {
+  border: 1px solid var(--text-primary);
+  padding: 12px 30px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  background-color: var(--electric-blue);
+  color: #000; 
+  border-color: var(--electric-blue);
+  box-shadow: var(--electric-glow);
+}
+
+section {
+  margin-bottom: 100px;
+}
+
+section h2 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  display: inline-block;
+  border-bottom: 2px solid var(--electric-blue);
+}
+
+/* PROJETOS */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.project-card {
+  background-color: var(--surface-color);
+  border: 1px solid #333;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--electric-blue);
+}
+
+.card-image {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%); 
+  transition: filter 0.3s ease;
+}
+
+.project-card:hover .card-image img {
+  filter: grayscale(0%); 
+}
+
+.card-content {
+  padding: 24px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-content h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.card-content p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.tag-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--electric-blue);
+  border: 1px solid var(--electric-blue);
+  padding: 4px 10px;
+}
+
+.card-links {
+  border-top: 1px solid #333;
+  padding-top: 15px;
+  display: flex;
+  gap: 20px;
+}
+
+.btn-repo, .btn-demo {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  position: relative;
+}
+
+.btn-repo:hover, .btn-demo:hover {
+  color: var(--electric-blue);
+  text-shadow: var(--electric-glow);
+}
+
+/* --- 5. LOADING --- */
+.loading {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-color);
+  color: var(--electric-blue);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+
+/* --- 6. EXPERIÊNCIA (Timeline Style) --- */
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-left: 20px;
+}
+
+/* A linha vertical contínua */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 50px;
+  padding-left: 40px; /* Espaço para a bolinha */
+}
+
+/* A bolinha neon */
+.timeline-dot {
+  position: absolute;
+  left: -6px; /* Centraliza na linha de 2px */
+  top: 5px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--bg-color);
+  border: 2px solid var(--electric-blue);
+  box-shadow: 0 0 10px var(--electric-blue);
+  transition: background 0.3s;
+}
+
+.timeline-item:hover .timeline-dot {
+  background-color: var(--electric-blue);
+}
+
+.timeline-header h3 {
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  margin-bottom: 5px;
+}
+
+.timeline-header .company {
+  font-size: 1.1rem;
+  color: var(--electric-blue);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.timeline-item .period {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+  font-family: monospace;
+}
+
+.timeline-item p {
+  color: #ccc;
+  line-height: 1.7;
+}
+
+/* --- 7. FORMAÇÃO (Cards Minimalistas) --- */
+.education-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.education-card {
+  flex: 1;
+  min-width: 280px;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 3px solid var(--electric-blue); /* Detalhe lateral */
+  padding: 20px;
+  border-radius: 0 8px 8px 0;
+  transition: transform 0.2s;
+}
+
+.education-card:hover {
+  transform: translateX(10px);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.education-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: var(--text-primary);
+}
+
+.education-card .institution {
+  display: block;
+  color: var(--electric-blue);
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.education-card .period {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-family: monospace;
+}
+
+/* --- 8. TECH STACK (Ícones Neon) --- */
+.icons-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.tech-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
+  cursor: default;
+}
+
+.tech-card:hover {
+  transform: translateY(-10px);
+}
+
+.icon-wrapper {
+  font-size: 4rem; 
+  margin-bottom: 10px;
+  filter: grayscale(100%); 
+  transition: all 0.4s ease;
+  opacity: 0.7;
+}
+
+.tech-card:hover .icon-wrapper {
+  filter: grayscale(0%);
+  opacity: 1;
+  text-shadow: 0 0 20px currentColor; 
+}
+
+.tech-card p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.tech-card:hover p {
+  opacity: 1; 
+  transform: translateY(0);
+  color: var(--text-primary);
+}
+
+/* --- 11. IMPROVEMENTS VISUAIS (NAVBAR & HERO V2) --- */
+
+/* Navbar de Vidro (Glassmorphism) */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  background: rgba(5, 5, 5, 0.8); /* Fundo semi-transparente */
+  backdrop-filter: blur(10px); /* O efeito de desfoque */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #fff;
+}
+
+.logo span {
+  color: var(--electric-blue);
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.navbar a {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  transition: color 0.3s;
+}
+
+.navbar a:hover {
+  color: var(--electric-blue);
+}
+
+.btn-contact {
+  padding: 8px 20px !important;
+  border: 1px solid var(--electric-blue) !important;
+  border-radius: 20px;
+  color: var(--electric-blue) !important;
+}
+
+.btn-contact:hover {
+  background: var(--electric-blue);
+  color: #000 !important;
+}
+
+/* Novo Layout do Hero (Lado a Lado) */
+.hero-section {
+  flex-direction: row; /* Muda de coluna para linha */
+  justify-content: space-between;
+  align-items: center;
+  text-align: left; /* Alinha texto à esquerda */
+  padding-top: 120px; /* Espaço para a navbar não cobrir */
+  gap: 50px;
+}
+
+.hero-text {
+  flex: 1;
+  animation: slideInLeft 1s ease;
+}
+
+.greeting {
+  color: var(--electric-blue);
+  font-family: monospace;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* A Foto com Brilho */
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  animation: fadeIn 2s ease;
+}
+
+.hero-image img {
+  width: 350px;
+  height: 350px;
+  border-radius: 50%; /* Foto redonda */
+  object-fit: cover;
+  border: 4px solid var(--surface-color);
+  z-index: 2;
+  position: relative;
+  /* Filtro para deixar a foto combinando com o tema (opcional) */
+  filter: grayscale(20%) contrast(110%); 
+}
+
+/* O brilho azul atrás da foto */
+.glow-effect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  height: 350px;
+  background: var(--electric-blue);
+  filter: blur(80px); /* O desfoque que cria o neon */
+  opacity: 0.4;
+  z-index: 1;
+  border-radius: 50%;
+}
+
+/* Responsividade (Celular) */
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column-reverse; /* Foto em cima, texto embaixo no celular */
+    text-align: center;
+    padding-top: 100px;
+  }
+  
+  .navbar ul {
+    display: none; /* Esconde menu no celular por enquanto pra não quebrar */
+  }
+
+  .hero-image img {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .glow-effect {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+/* Animações Simples */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+html {
+  scroll-behavior: smooth; 
+  scroll-padding-top: 100px; 
+}
