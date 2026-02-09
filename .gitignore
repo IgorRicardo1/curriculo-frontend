@@ -20,7 +20,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-git add .
-git commit -m "Frontend: Login integrado, Navbar fixa e melhorias visuais"
-git push
