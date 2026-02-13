@@ -64,7 +64,7 @@ function Dashboard() {
         }
     };
 
-    
+
 
     const fazerLogout = () => {
         localStorage.removeItem('token');
