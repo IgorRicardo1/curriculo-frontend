@@ -1,18 +1,32 @@
 import React from 'react';
-import { SiJavascript, SiReact, SiNodedotjs, SiPostgresql, SiGit, SiCss3, SiHtml5, SiPython } from "react-icons/si";
+import { SiJavascript, SiReact, SiNodedotjs, SiPostgresql, SiGit, SiCss3, SiHtml5, SiPython, SiDjango, SiFlask, SiFastapi, SiHibernate, SiSpringboot } from "react-icons/si";
 import { TbBrandCSharp } from "react-icons/tb";
+import { FaJava } from "react-icons/fa";
 
 function TechStack() {
   const techs = [
-    { name: "JavaScript", icon: <SiJavascript />, color: "#F7DF1E" },
-    { name: "React", icon: <SiReact />, color: "#61DAFB" },
+    // Backend
     { name: "Node.js", icon: <SiNodedotjs />, color: "#339933" },
     { name: "Python", icon: <SiPython />, color: "#3776AB" },
+    { name: "Java", icon: <FaJava />, color: "#007396" },
     { name: "C#", icon: <TbBrandCSharp />, color: "#239120" }, 
+    { name: "Django", icon: <SiDjango />, color: "#092E20" },
+    { name: "Flask", icon: <SiFlask />, color: "#B0B0B0" },
+    { name: "FastAPI", icon: <SiFastapi />, color: "#009688" },
+    { name: "Spring Boot", icon: <SiSpringboot />, color: "#6DB33F" },
+    
+    // Bancos de Dados / ORMs
     { name: "PostgreSQL", icon: <SiPostgresql />, color: "#336791" },
-    { name: "Git", icon: <SiGit />, color: "#F05032" },
+    { name: "Hibernate", icon: <SiHibernate />, color: "#59666C" },
+
+    // Frontend
+    { name: "JavaScript", icon: <SiJavascript />, color: "#F7DF1E" },
+    { name: "React", icon: <SiReact />, color: "#61DAFB" },
     { name: "CSS3", icon: <SiCss3 />, color: "#1572B6" },
     { name: "HTML5", icon: <SiHtml5 />, color: "#E34F26" },
+
+    // Outros
+    { name: "Git", icon: <SiGit />, color: "#F05032" },
   ];
 
   return (

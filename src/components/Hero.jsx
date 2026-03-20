@@ -2,7 +2,7 @@ import React from 'react';
 import { useMemo } from 'react';
 
 
-function Hero({ nome, titulo, linkedin, github }) {
+function Hero({ nome, titulo, resumo_curto, linkedin, github }) {
 
   const saudacao = useMemo(() => {
     const hora = new Date().getHours();
@@ -17,7 +17,7 @@ function Hero({ nome, titulo, linkedin, github }) {
         <span className="greeting">{saudacao}, meu nome é</span>
         <h1>{nome}</h1>
         <h2 className="highlight">{titulo}</h2>
-        <p>Apaixonado por tecnologia, desenvolvimento pessoal e jogos eletrônicos</p>
+        <p>{resumo_curto || "Desenvolvedor Backend em transição de carreira, focado em criar soluções robustas e escaláveis."}</p>
 
         <div className="social-links">
           {github && (

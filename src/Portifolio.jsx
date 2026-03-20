@@ -58,6 +58,7 @@ function Portifolio() {
                 <Hero
                     nome={dados.nome}
                     titulo={dados.titulo}
+                    resumo_curto={dados.resumo_curto}
                     linkedin={dados.linkedin_url}
                     github={dados.github_url}
                 />
