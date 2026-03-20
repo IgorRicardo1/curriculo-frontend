@@ -1,25 +1,32 @@
 import React from 'react';
-import Login from './Login';
-import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Portifolio from './Portifolio';
+import Login from './Login';
+import Dashboard from './Dashboard';
+import ProtectedRoute from './components/ProtectedRoute';
+import './App.css';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Portifolio />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/admin",
+    element: (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
+  },
+]);
 
 function App() {
-  return (
-    <BrowserRouter>
-    <Routes>
-      <Route 
-      path ="/" 
-      element={<Portifolio/>}
-      />
-      <Route
-        path='/login'
-        element={<Login />}
-      />
-      </Routes>
-    </BrowserRouter>
-
-  )
+  return <RouterProvider router={router} />;
 }
 
 export default App;

@@ -9,20 +9,45 @@ import Education from "./components/Education"
 
 function Portifolio() {
     const apiUrl = import.meta.env.VITE_API_URL;
-    const [dados, setDados] = useState(null)
+    const [dados, setDados] = useState(null);
+    const [erro, setErro] = useState(false);
+
+    const buscarDados = async () => {
+        setErro(false);
+        try {
+            const resposta = await fetch(`${apiUrl}/perfil`);
+            if (!resposta.ok) throw new Error("Falha na conexão");
+            const resultado = await resposta.json();
+            setDados(resultado);
+        } catch (error) {
+            console.error("Erro ao buscar dados:", error);
+            setErro(true);
+        }
+    }
 
     useEffect(() => {
-        const buscarDados = async () => {
-            try {
-                const resposta = await fetch(`${apiUrl}/perfil`)
-                const resultado = await resposta.json()
-                setDados(resultado);
-            } catch (error) {
-                console.error("Erro ao buscar:", error)
-            }
-        }
-        buscarDados()
+        buscarDados();
     }, []);
+
+    if (erro) {
+        return (
+            <div className="loading" style={{ flexDirection: 'column', gap: '20px' }}>
+                <p>ERRO AO CARREGAR OS DADOS.</p>
+                <button 
+                    onClick={buscarDados}
+                    style={{ 
+                        padding: '10px 20px', 
+                        background: 'var(--electric-blue)', 
+                        border: 'none', 
+                        cursor: 'pointer',
+                        fontWeight: 'bold'
+                    }}
+                >
+                    TENTAR NOVAMENTE
+                </button>
+            </div>
+        );
+    }
 
     if (!dados) return <div className="loading">CARREGANDO SISTEMA...</div>;
 

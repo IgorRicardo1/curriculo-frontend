@@ -13,7 +13,7 @@ function NavBar() {
           <li><a href="#experience">Carreira</a></li>
         </ul>
       </nav>
-      <a href="https://wa.me/SEUNUMERO" target="_blank" className="btn-contact">
+      <a href="https://wa.me/5541992871080" target="_blank" rel="noopener noreferrer" className="btn-contact">
         Contato
       </a>
     </header>

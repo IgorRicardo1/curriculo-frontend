@@ -8,6 +8,7 @@ function Dashboard() {
         descricao: '',
         imagem_url: '',
         link_repo: '',
+        link_demo: '',
         tags: ''
     });
     const [projetos, setProjetos] = useState([]);
@@ -18,14 +19,19 @@ function Dashboard() {
             return;
         }
         try {
+            const token = localStorage.getItem('token');
             const resposta = await fetch(`${import.meta.env.VITE_API_URL}/projetos/${id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             });
             if (resposta.ok) {
                 alert("Projeto deletado!");
                 setProjetos(projetos.filter(item => item.id !== id));
             } else {
-                alert("Erro ao deletar no servidor.");
+                const erroData = await resposta.json();
+                alert(`Erro: ${erroData.error || "Erro ao deletar"}`);
             }
         } catch (error) {
             console.error("Erro na requisição:", error);
@@ -41,10 +47,12 @@ function Dashboard() {
     const salvarProjeto = async (e) => {
         e.preventDefault();
         try {
+            const token = localStorage.getItem('token');
             const resposta = await fetch(`${import.meta.env.VITE_API_URL}/projetos`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(novoProjeto)
             });
@@ -54,10 +62,11 @@ function Dashboard() {
                 alert("Projeto salvo com sucesso!");
                 setProjetos([...projetos, projetoCriado]);
                 setNovoProjeto({
-                    titulo: '', descricao: '', imagem_url: '', link_repo: '', tags: ''
+                    titulo: '', descricao: '', imagem_url: '', link_repo: '', link_demo: '', tags: ''
                 });
             } else {
-                alert("Erro ao salvar o projeto.");
+                const erroData = await resposta.json();
+                alert(`Erro: ${erroData.error || "Erro ao salvar"}`);
             }
         } catch (error) {
             console.error("Erro na requisição:", error);
@@ -129,6 +138,11 @@ function Dashboard() {
                 <input name="link_repo"
                     placeholder="Link do Repositório"
                     value={novoProjeto.link_repo}
+                    onChange={handleMudanca}
+                />
+                <input name="link_demo"
+                    placeholder="Link da Demo (Site no ar)"
+                    value={novoProjeto.link_demo}
                     onChange={handleMudanca}
                 />
                 <input name="tags"
