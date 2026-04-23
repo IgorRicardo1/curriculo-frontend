@@ -1,19 +1,30 @@
 import React from 'react';
+import { motion } from "framer-motion";
 
 function Education({ lista }) {
   if (!lista || lista.length === 0) return null;
 
   return (
-    <section className="education-section">
-      <h2>Formação Acadêmica</h2>
+    <section className="education-section" style={{ marginTop: '80px' }}>
+      <h2 className="font-heading" style={{ fontSize: '2rem', marginBottom: '40px' }}>
+        <span className="text-gradient">Formação Acadêmica</span>
+      </h2>
       
-      <div className="education-grid">
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px' }}>
         {lista.map((item, index) => (
-          <div key={item.id || index} className="education-card">
-            <h3>{item.curso}</h3>
-            <span className="institution">{item.instituicao}</span>
-            <span className="period">{item.periodo}</span>
-          </div>
+          <motion.div 
+            key={item.id || index} 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1 }}
+            className="bento-card"
+            style={{ padding: '24px' }}
+          >
+            <h3 className="font-heading" style={{ fontSize: '1.2rem', color: '#fff' }}>{item.titulo}</h3>
+            <span style={{ color: 'var(--accent-neon)', fontWeight: '600', display: 'block', margin: '5px 0' }}>{item.instituicao}</span>
+            <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontFamily: 'monospace' }}>{item.periodo}</span>
+          </motion.div>
         ))}
       </div>
     </section>

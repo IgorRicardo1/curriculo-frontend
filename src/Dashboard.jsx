@@ -9,7 +9,11 @@ function Dashboard() {
         imagem_url: '',
         link_repo: '',
         link_demo: '',
-        tags: ''
+        tags: '',
+        desafio: '',
+        engenharia: '',
+        diferencial: '',
+        galeria_urls: ''
     });
     const [projetos, setProjetos] = useState([]);
     const navigate = useNavigate();
@@ -48,13 +52,19 @@ function Dashboard() {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token');
+            const payload = {
+                ...novoProjeto,
+                galeria_urls: novoProjeto.galeria_urls
+                    ? novoProjeto.galeria_urls.split(',').map(url => url.trim()).filter(Boolean)
+                    : []
+            };
             const resposta = await fetch(`${import.meta.env.VITE_API_URL}/projetos`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify(novoProjeto)
+                body: JSON.stringify(payload)
             });
 
             if (resposta.ok) {
@@ -62,7 +72,8 @@ function Dashboard() {
                 alert("Projeto salvo com sucesso!");
                 setProjetos([...projetos, projetoCriado]);
                 setNovoProjeto({
-                    titulo: '', descricao: '', imagem_url: '', link_repo: '', link_demo: '', tags: ''
+                    titulo: '', descricao: '', imagem_url: '', link_repo: '', link_demo: '', tags: '',
+                    desafio: '', engenharia: '', diferencial: '', galeria_urls: ''
                 });
             } else {
                 const erroData = await resposta.json();
@@ -146,10 +157,40 @@ function Dashboard() {
                     onChange={handleMudanca}
                 />
                 <input name="tags"
-                    placeholder="TAGS"
+                    placeholder="TAGS (separadas por vírgula)"
                     value={novoProjeto.tags}
                     onChange={handleMudanca}
                 />
+
+                <h3 style={{ marginTop: '20px', color: 'var(--accent-neon, #00e5ff)' }}>Storytelling do Projeto</h3>
+
+                <textarea name="desafio"
+                    placeholder="O Desafio – Qual problema este projeto resolve?"
+                    value={novoProjeto.desafio}
+                    onChange={handleMudanca}
+                    rows={3}
+                    style={{ width: '100%', resize: 'vertical' }}
+                />
+                <textarea name="engenharia"
+                    placeholder="A Engenharia – Como foi construído tecnicamente?"
+                    value={novoProjeto.engenharia}
+                    onChange={handleMudanca}
+                    rows={3}
+                    style={{ width: '100%', resize: 'vertical' }}
+                />
+                <textarea name="diferencial"
+                    placeholder="Diferencial – O que torna este projeto único?"
+                    value={novoProjeto.diferencial}
+                    onChange={handleMudanca}
+                    rows={3}
+                    style={{ width: '100%', resize: 'vertical' }}
+                />
+                <input name="galeria_urls"
+                    placeholder="URLs da Galeria (separadas por vírgula)"
+                    value={novoProjeto.galeria_urls}
+                    onChange={handleMudanca}
+                />
+
                 <button type="submit">Salvar</button>
             </form>
 

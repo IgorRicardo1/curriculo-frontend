@@ -1,58 +1,55 @@
 import React from 'react';
-import { SiJavascript, SiReact, SiNodedotjs, SiPostgresql, SiGit, SiCss3, SiHtml5, SiPython, SiDjango, SiFlask, SiFastapi, SiHibernate, SiSpringboot } from "react-icons/si";
-import { TbBrandCSharp } from "react-icons/tb";
-import { FaJava } from "react-icons/fa";
+import { SiJavascript, SiReact, SiNodedotjs, SiPostgresql, SiGit, SiPython, SiDjango, SiFlask } from "react-icons/si";
+import { motion } from "framer-motion";
 
-function TechStack() {
+function TechStack({ className }) {
   const techs = [
-    // Backend
     { name: "Node.js", icon: <SiNodedotjs />, color: "#339933" },
     { name: "Python", icon: <SiPython />, color: "#3776AB" },
-    { name: "Java", icon: <FaJava />, color: "#007396" },
-    { name: "C#", icon: <TbBrandCSharp />, color: "#239120" }, 
-    { name: "Django", icon: <SiDjango />, color: "#092E20" },
-    { name: "Flask", icon: <SiFlask />, color: "#B0B0B0" },
-    { name: "FastAPI", icon: <SiFastapi />, color: "#009688" },
-    { name: "Spring Boot", icon: <SiSpringboot />, color: "#6DB33F" },
-    
-    // Bancos de Dados / ORMs
-    { name: "PostgreSQL", icon: <SiPostgresql />, color: "#336791" },
-    { name: "Hibernate", icon: <SiHibernate />, color: "#59666C" },
-
-    // Frontend
-    { name: "JavaScript", icon: <SiJavascript />, color: "#F7DF1E" },
     { name: "React", icon: <SiReact />, color: "#61DAFB" },
-    { name: "CSS3", icon: <SiCss3 />, color: "#1572B6" },
-    { name: "HTML5", icon: <SiHtml5 />, color: "#E34F26" },
-
-    // Outros
+    { name: "PostgreSQL", icon: <SiPostgresql />, color: "#336791" },
+    { name: "JavaScript", icon: <SiJavascript />, color: "#F7DF1E" },
+    { name: "Django", icon: <SiDjango />, color: "#092E20" },
     { name: "Git", icon: <SiGit />, color: "#F05032" },
+    { name: "Flask", icon: <SiFlask />, color: "#B0B0B0" },
   ];
 
   return (
-    <section className="tech-stack-section" style={{ textAlign: 'center', padding: '60px 20px' }}>
-      <h2 style={{ 
-        color: '#fff', 
-        fontSize: '2rem', 
-        marginBottom: '40px', 
-        fontFamily: 'Roboto, sans-serif',
-        fontWeight: '900',
-        textTransform: 'uppercase'
-      }}>
-        Minhas Tecnologias
-      </h2>
+    <motion.div 
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        className={`bento-card ${className}`}
+    >
+      <h3 className="font-heading" style={{ fontSize: '1.2rem', marginBottom: '20px' }}>Minhas Tecnologias</h3>
       
-      <div className="icons-grid">
+      <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fill, minmax(70px, 1fr))', 
+          gap: '20px',
+          justifyItems: 'center'
+      }}>
         {techs.map((tech, index) => (
-          <div key={index} className="tech-card">
-            <div className="icon-wrapper" style={{ color: tech.color }}>
-              {tech.icon}
-            </div>
-            <p>{tech.name}</p>
-          </div>
+          <motion.div 
+            key={index} 
+            whileHover={{ scale: 1.2, rotate: 5 }}
+            style={{ 
+                fontSize: '2rem', 
+                color: tech.color, 
+                cursor: 'pointer',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '8px'
+            }}
+            title={tech.name}
+          >
+            {tech.icon}
+            <span style={{ fontSize: '0.6rem', color: 'var(--text-secondary)', fontWeight: '700', textTransform: 'uppercase' }}>{tech.name}</span>
+          </motion.div>
         ))}
       </div>
-    </section>
+    </motion.div>
   );
 }
 

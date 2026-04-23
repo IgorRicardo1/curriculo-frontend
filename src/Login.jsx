@@ -48,7 +48,7 @@ function Login() {
         <div className="login-container">
             <div className="login-card">
                 <h1>Acesso Restrito</h1>
-                <p>Área administrativa do POrtfólio</p>
+                <p>Área administrativa do Portfólio</p>
 
                 {erro && <div style={{ color: '#ff4444', marginBottom: '15px', fontWeight: 'bold' }}>{erro}</div>}
 
