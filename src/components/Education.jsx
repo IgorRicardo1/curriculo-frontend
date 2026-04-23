@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useLanguage } from '../context/LanguageContext';
 
 function Education({ lista }) {
-  const { t } = useLanguage();
+  const { t, getLocalized } = useLanguage();
   if (!lista || lista.length === 0) return null;
 
   return (
@@ -23,7 +23,7 @@ function Education({ lista }) {
             className="bento-card"
             style={{ padding: '24px' }}
           >
-            <h3 className="font-heading" style={{ fontSize: '1.2rem', color: '#fff' }}>{item.curso}</h3>
+            <h3 className="font-heading" style={{ fontSize: '1.2rem', color: '#fff' }}>{getLocalized(item, 'curso')}</h3>
             <span style={{ color: 'var(--accent-neon)', fontWeight: '600', display: 'block', margin: '5px 0' }}>{item.instituicao}</span>
             <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontFamily: 'monospace' }}>{item.periodo}</span>
           </motion.div>

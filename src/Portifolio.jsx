@@ -14,7 +14,7 @@ function Portifolio() {
     const apiUrl = import.meta.env.VITE_API_URL;
     const [dados, setDados] = useState(null);
     const [erro, setErro] = useState(false);
-    const { t } = useLanguage();
+    const { t, getLocalized } = useLanguage();
 
     const buscarDados = async () => {
         setErro(false);
@@ -79,15 +79,15 @@ function Portifolio() {
             <div id="hero" className="bento-container" style={{ marginTop: '100px' }}>
                 <Hero
                     nome={dados.nome}
-                    titulo={dados.titulo}
-                    resumo_curto={dados.resumo_curto}
+                    titulo={getLocalized(dados, 'titulo')}
+                    resumo_curto={getLocalized(dados, 'resumo_curto')}
                     linkedin={dados.linkedin_url}
                     github={dados.github_url}
                     foto={githubFoto}
                     className="col-span-2 row-span-2"
                 />
                 
-                <About bio={dados.bio} localizacao={dados.localizacao} className="row-span-2" />
+                <About bio={getLocalized(dados, 'bio')} localizacao={dados.localizacao} className="row-span-2" />
                 
                 <TechStack className="col-span-2" />
                 

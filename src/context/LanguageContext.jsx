@@ -28,7 +28,9 @@ const translations = {
         form_message: "Mensagem",
         form_send: "Enviar",
         theme_label: "Tema",
-        lang_label: "Idioma"
+        lang_label: "Idioma",
+        form_success: "Mensagem enviada com sucesso!",
+        form_error: "Erro ao enviar mensagem. Tente novamente."
     },
     en: {
         nav_start: "Home",
@@ -55,7 +57,9 @@ const translations = {
         form_message: "Message",
         form_send: "Send",
         theme_label: "Theme",
-        lang_label: "Language"
+        lang_label: "Language",
+        form_success: "Message sent successfully!",
+        form_error: "Error sending message. Try again."
     },
     es: {
         nav_start: "Inicio",
@@ -82,7 +86,9 @@ const translations = {
         form_message: "Mensaje",
         form_send: "Enviar",
         theme_label: "Tema",
-        lang_label: "Idioma"
+        lang_label: "Idioma",
+        form_success: "¡Mensaje enviado con éxito!",
+        form_error: "Error al enviar el mensaje. Inténtalo de nuevo."
     }
 };
 
@@ -95,8 +101,15 @@ export const LanguageProvider = ({ children }) => {
 
     const t = (key) => translations[language][key] || key;
 
+    // Função para obter campos localizados do backend (ex: dados.bio_en)
+    const getLocalized = (obj, field) => {
+        if (!obj) return '';
+        const localizedField = `${field}_${language}`;
+        return obj[localizedField] || obj[field] || '';
+    };
+
     return (
-        <LanguageContext.Provider value={{ language, setLanguage, t }}>
+        <LanguageContext.Provider value={{ language, setLanguage, t, getLocalized }}>
             {children}
         </LanguageContext.Provider>
     );

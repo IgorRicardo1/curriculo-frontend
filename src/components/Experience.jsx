@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useLanguage } from '../context/LanguageContext';
 
 function Experience({ lista }) {
-  const { t } = useLanguage();
+  const { t, getLocalized } = useLanguage();
   if (!lista || lista.length === 0) return null;
 
   return (
@@ -35,7 +35,7 @@ function Experience({ lista }) {
             }}></div>
 
             <div className="timeline-header" style={{ marginBottom: '10px' }}>
-              <h3 className="font-heading" style={{ fontSize: '1.4rem', color: '#fff' }}>{item.cargo}</h3>
+              <h3 className="font-heading" style={{ fontSize: '1.4rem', color: '#fff' }}>{getLocalized(item, 'cargo')}</h3>
               <span style={{ color: 'var(--accent-neon)', fontWeight: '700', textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '1px' }}>
                 {item.empresa}
               </span>
@@ -46,7 +46,7 @@ function Experience({ lista }) {
             </span>
             
             <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', fontSize: '0.95rem' }}>
-                {item.descricao}
+                {getLocalized(item, 'descricao')}
             </p>
           </motion.div>
         ))}

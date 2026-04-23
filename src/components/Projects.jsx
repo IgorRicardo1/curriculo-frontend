@@ -38,7 +38,7 @@ const MockupWindow = ({ children, aspectRatio = "16/10", label = "Project Previe
 
 
 function Projects({ lista }) {
-    const { t } = useLanguage();
+    const { t, getLocalized } = useLanguage();
     const formatLink = (link) => {
         if (!link) return "#";
         return link.startsWith('http') ? link : `https://${link}`;
@@ -83,7 +83,7 @@ function Projects({ lista }) {
                             >
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
                                     <span style={{ fontSize: '3rem', fontWeight: '900', color: 'rgba(255,255,255,0.03)', position: 'absolute', zIndex: -1 }}>0{index + 1}</span>
-                                    <h3 className="font-heading" style={{ fontSize: '2.5rem', fontWeight: '800' }}>{projeto.titulo}</h3>
+                                    <h3 className="font-heading" style={{ fontSize: '2.5rem', fontWeight: '800' }}>{getLocalized(projeto, 'titulo')}</h3>
                                 </div>
                                 <div className="tags-container" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '25px' }}>
                                     {projeto.tags && projeto.tags.split(',').map((tag, i) => (
@@ -102,7 +102,7 @@ function Projects({ lista }) {
                                     ))}
                                 </div>
                                 <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '30px' }}>
-                                    {projeto.descricao}
+                                    {getLocalized(projeto, 'descricao')}
                                 </p>
                                 <div style={{ display: 'flex', gap: '20px' }}>
                                     {projeto.link_repo && (
@@ -132,7 +132,7 @@ function Projects({ lista }) {
                                         <span style={{ fontSize: '0.8rem', fontWeight: '800', textTransform: 'uppercase' }}>{t('projects_challenge')}</span>
                                     </div>
                                     <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                                        {projeto.desafio || "Desenvolvimento de uma solução técnica complexa focada em performance e usabilidade."}
+                                        {getLocalized(projeto, 'desafio') || "Desenvolvimento de uma solução técnica complexa focada em performance e usabilidade."}
                                     </p>
                                 </div>
                                 <div className="bento-card" style={{ padding: '24px', background: 'var(--accent-glow)' }}>
@@ -141,7 +141,7 @@ function Projects({ lista }) {
                                         <span style={{ fontSize: '0.8rem', fontWeight: '800', textTransform: 'uppercase' }}>{t('projects_engineering')}</span>
                                     </div>
                                     <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                                        {projeto.engenharia || "Uso de padrões de projeto modernos para garantir escalabilidade e manutenção eficiente."}
+                                        {getLocalized(projeto, 'engenharia') || "Uso de padrões de projeto modernos para garantir escalabilidade e manutenção eficiente."}
                                     </p>
                                 </div>
                                 <div className="bento-card" style={{ padding: '24px', background: 'var(--accent-glow)' }}>
@@ -150,7 +150,7 @@ function Projects({ lista }) {
                                         <span style={{ fontSize: '0.8rem', fontWeight: '800', textTransform: 'uppercase' }}>{t('projects_diff')}</span>
                                     </div>
                                     <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                                        {projeto.diferencial || "Entrega de uma experiência de usuário excepcional com foco em detalhes e fluidez."}
+                                        {getLocalized(projeto, 'diferencial') || "Entrega de uma experiência de usuário excepcional com foco em detalhes e fluidez."}
                                     </p>
                                 </div>
                             </motion.div>
