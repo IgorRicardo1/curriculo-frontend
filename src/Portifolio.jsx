@@ -6,6 +6,7 @@ import Projects from "./components/Projects"
 import TechStack from "./components/TechStack"
 import Experience from "./components/Experience"
 import Education from "./components/Education"
+import { SiLinkedin, SiGithub, SiWhatsapp } from "react-icons/si"
 
 function Portifolio() {
     const apiUrl = import.meta.env.VITE_API_URL;
@@ -83,16 +84,22 @@ function Portifolio() {
                     className="col-span-2 row-span-2"
                 />
                 
-                <About bio={dados.bio} className="row-span-2" />
+                <About bio={dados.bio} localizacao={dados.localizacao} className="row-span-2" />
                 
                 <TechStack className="col-span-2" />
                 
 
                 <div className="bento-card col-span-1" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '15px' }}>
                     <h3 className="font-heading" style={{ fontSize: '1.2rem' }}>Conecte-se</h3>
-                    <div style={{ display: 'flex', gap: '15px' }}>
+                    <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
                         <a href={formatLink(dados.linkedin_url)} target="_blank" rel="noreferrer" className="glow" style={{ fontWeight: '600', color: 'var(--accent-neon)' }}>LinkedIn</a>
                         <a href={formatLink(dados.github_url)} target="_blank" rel="noreferrer" className="glow" style={{ fontWeight: '600', color: 'var(--accent-neon)' }}>GitHub</a>
+                        {dados.whatsapp && (
+                            <a href={`https://wa.me/${dados.whatsapp.replace(/\D/g, '')}`} target="_blank" rel="noreferrer" className="glow" style={{ fontWeight: '600', color: 'var(--accent-neon)' }}>WhatsApp</a>
+                        )}
+                        {dados.email_contato && (
+                            <a href={`mailto:${dados.email_contato}`} className="glow" style={{ fontWeight: '600', color: 'var(--accent-neon)' }}>Email</a>
+                        )}
                     </div>
                 </div>
 
@@ -113,6 +120,19 @@ function Portifolio() {
             </div>
 
             <footer style={{ textAlign: 'center', padding: '60px 40px', color: 'var(--text-secondary)', fontSize: '0.85rem', borderTop: '1px solid var(--border-color)', marginTop: '40px' }}>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '25px', marginBottom: '25px' }}>
+                    <a href={formatLink(dados.linkedin_url)} target="_blank" rel="noreferrer" className="glow" style={{ fontSize: '1.5rem', color: 'var(--text-primary)' }} title="LinkedIn">
+                        <SiLinkedin />
+                    </a>
+                    <a href={formatLink(dados.github_url)} target="_blank" rel="noreferrer" className="glow" style={{ fontSize: '1.5rem', color: 'var(--text-primary)' }} title="GitHub">
+                        <SiGithub />
+                    </a>
+                    {dados.whatsapp && (
+                        <a href={`https://wa.me/${dados.whatsapp.replace(/\D/g, '')}`} target="_blank" rel="noreferrer" className="glow" style={{ fontSize: '1.5rem', color: 'var(--text-primary)' }} title="WhatsApp">
+                            <SiWhatsapp />
+                        </a>
+                    )}
+                </div>
                 <p>&copy; {new Date().getFullYear()} {dados.nome}. Criado com foco em performance.</p>
             </footer>
         </main>

@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-function About({ bio, className }) {
+function About({ bio, localizacao, className }) {
     return (
         <motion.div 
             initial={{ opacity: 0, x: 20 }}
@@ -23,7 +23,7 @@ function About({ bio, className }) {
             </p>
             
             <div style={{ marginTop: '20px', fontSize: '0.8rem', color: 'var(--text-primary)', fontWeight: '600' }}>
-                LOCALIZAÇÃO: <span style={{ color: 'var(--text-secondary)' }}>BRASIL</span>
+                LOCALIZAÇÃO: <span style={{ color: 'var(--text-secondary)' }}>{localizacao || "BRASIL"}</span>
             </div>
         </motion.div>
     );

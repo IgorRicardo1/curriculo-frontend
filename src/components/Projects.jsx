@@ -35,7 +35,13 @@ const MockupWindow = ({ children, aspectRatio = "16/10", label = "Project Previe
     </div>
 );
 
+
 function Projects({ lista }) {
+    const formatLink = (link) => {
+        if (!link) return "#";
+        return link.startsWith('http') ? link : `https://${link}`;
+    };
+
     const [imagemAmpliada, setImagemAmpliada] = useState(null);
 
     if (!lista || lista.length === 0) return null;
@@ -98,12 +104,12 @@ function Projects({ lista }) {
                                 </p>
                                 <div style={{ display: 'flex', gap: '20px' }}>
                                     {projeto.link_repo && (
-                                        <a href={projeto.link_repo} target="_blank" rel="noopener noreferrer" className="glow" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-primary)', fontWeight: '700', fontSize: '0.9rem' }}>
+                                        <a href={formatLink(projeto.link_repo)} target="_blank" rel="noopener noreferrer" className="glow" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-primary)', fontWeight: '700', fontSize: '0.9rem' }}>
                                             <SiGithub size={20} /> Repository
                                         </a>
                                     )}
                                     {projeto.link_demo && (
-                                        <a href={projeto.link_demo} target="_blank" rel="noopener noreferrer" className="glow" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-neon)', fontWeight: '700', fontSize: '0.9rem' }}>
+                                        <a href={formatLink(projeto.link_demo)} target="_blank" rel="noopener noreferrer" className="glow" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-neon)', fontWeight: '700', fontSize: '0.9rem' }}>
                                             <Eye size={20} /> Live Experience
                                         </a>
                                     )}

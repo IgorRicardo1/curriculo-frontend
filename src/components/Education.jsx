@@ -21,7 +21,7 @@ function Education({ lista }) {
             className="bento-card"
             style={{ padding: '24px' }}
           >
-            <h3 className="font-heading" style={{ fontSize: '1.2rem', color: '#fff' }}>{item.titulo}</h3>
+            <h3 className="font-heading" style={{ fontSize: '1.2rem', color: '#fff' }}>{item.curso}</h3>
             <span style={{ color: 'var(--accent-neon)', fontWeight: '600', display: 'block', margin: '5px 0' }}>{item.instituicao}</span>
             <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontFamily: 'monospace' }}>{item.periodo}</span>
           </motion.div>

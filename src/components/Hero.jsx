@@ -8,6 +8,13 @@ function Hero({ nome, titulo, resumo_curto, linkedin, github, foto, className })
         return link.startsWith('http') ? link : `https://${link}`;
     };
 
+    const getGreeting = () => {
+        const hour = new Date().getHours();
+        if (hour >= 5 && hour < 12) return "Bom dia";
+        if (hour >= 12 && hour < 18) return "Boa tarde";
+        return "Boa noite";
+    };
+
     return (
         <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -28,11 +35,11 @@ function Hero({ nome, titulo, resumo_curto, linkedin, github, foto, className })
                         letterSpacing: '2px'
                     }}
                 >
-                    Desenvolvedor Full-Stack
+                    {titulo}
                 </motion.span>
                 
                 <h1 className="font-heading" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', lineHeight: '1.1', margin: '15px 0' }}>
-                    Olá, eu sou <br />
+                    {getGreeting()}, eu sou <br />
                     <span className="text-gradient" style={{ fontWeight: '800' }}>{nome}</span>
                 </h1>
                 
