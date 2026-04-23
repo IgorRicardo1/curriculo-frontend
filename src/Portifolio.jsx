@@ -6,12 +6,15 @@ import Projects from "./components/Projects"
 import TechStack from "./components/TechStack"
 import Experience from "./components/Experience"
 import Education from "./components/Education"
+import ContactForm from "./components/ContactForm"
 import { SiLinkedin, SiGithub, SiWhatsapp } from "react-icons/si"
+import { useLanguage } from "./context/LanguageContext"
 
 function Portifolio() {
     const apiUrl = import.meta.env.VITE_API_URL;
     const [dados, setDados] = useState(null);
     const [erro, setErro] = useState(false);
+    const { t } = useLanguage();
 
     const buscarDados = async () => {
         setErro(false);
@@ -90,7 +93,7 @@ function Portifolio() {
                 
 
                 <div className="bento-card col-span-1" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '15px' }}>
-                    <h3 className="font-heading" style={{ fontSize: '1.2rem' }}>Conecte-se</h3>
+                    <h3 className="font-heading" style={{ fontSize: '1.2rem' }}>{t('contact_title')}</h3>
                     <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
                         <a href={formatLink(dados.linkedin_url)} target="_blank" rel="noreferrer" className="glow" style={{ fontWeight: '600', color: 'var(--accent-neon)' }}>LinkedIn</a>
                         <a href={formatLink(dados.github_url)} target="_blank" rel="noreferrer" className="glow" style={{ fontWeight: '600', color: 'var(--accent-neon)' }}>GitHub</a>
@@ -105,7 +108,11 @@ function Portifolio() {
 
                 <div className="bento-card col-span-1" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <div style={{ width: '10px', height: '10px', background: '#00ff00', borderRadius: '50%', boxShadow: '0 0 10px #00ff00' }}></div>
-                    <span style={{ fontSize: '0.9rem', fontWeight: '500' }}>Disponível para Projetos</span>
+                    <span style={{ fontSize: '0.9rem', fontWeight: '500' }}>{t('hero_available')}</span>
+                </div>
+
+                <div id="contact">
+                    <ContactForm />
                 </div>
             </div>
 
@@ -133,7 +140,7 @@ function Portifolio() {
                         </a>
                     )}
                 </div>
-                <p>&copy; {new Date().getFullYear()} {dados.nome}. Criado com foco em performance.</p>
+                <p>&copy; {new Date().getFullYear()} {dados.nome}. {t('footer_copy')}</p>
             </footer>
         </main>
     )

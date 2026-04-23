@@ -1,13 +1,15 @@
 import React from 'react';
 import { motion } from "framer-motion";
+import { useLanguage } from '../context/LanguageContext';
 
 function Experience({ lista }) {
+  const { t } = useLanguage();
   if (!lista || lista.length === 0) return null;
 
   return (
     <section className="experience-section" style={{ marginTop: '80px' }}>
-      <h2 className="font-heading" style={{ fontSize: '2rem', marginBottom: '40px' }}>
-        <span className="text-gradient">Trajetória Profissional</span>
+      <h2 className="font-heading" style={{ fontSize: '2rem', marginBottom: '40px', color: 'var(--text-primary)' }}>
+        {t('exp_title')}
       </h2>
       
       <div className="timeline" style={{ position: 'relative', borderLeft: '1px solid var(--border-color)', paddingLeft: '30px', marginLeft: '10px' }}>

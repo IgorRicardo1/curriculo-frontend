@@ -2,7 +2,7 @@
 
 
 :root {
-  /* Cores Base */
+  /* Cores Base - Dark (Default) */
   --bg-color: #080808;
   --surface-color: #121212;
   --surface-hover: #1a1a1a;
@@ -20,6 +20,28 @@
   
   /* Spacing */
   --grid-gap: 16px;
+}
+
+body.light {
+  --bg-color: #ffffff;
+  --surface-color: #f0f4f8;
+  --surface-hover: #d9e2ec;
+  --text-primary: #102a43; /* Navy deep instead of black */
+  --text-secondary: #486581; /* Muted navy instead of gray */
+  --accent-neon: #0044ff;
+  --accent-glow: rgba(0, 68, 255, 0.1);
+  --border-color: rgba(16, 42, 67, 0.1);
+}
+
+body.mono {
+  --bg-color: #1a1a1a;
+  --surface-color: #2d2d2d;
+  --surface-hover: #3d3d3d;
+  --text-primary: #face6b;
+  --text-secondary: rgba(250, 206, 107, 0.7);
+  --accent-neon: #face6b;
+  --accent-glow: rgba(250, 206, 107, 0.3);
+  --border-color: rgba(250, 206, 107, 0.2);
 }
 
 * {
@@ -64,9 +86,9 @@ h1, h2, h3, h4, .font-heading {
 }
 
 .bento-card:hover {
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: var(--accent-neon);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 30px var(--accent-glow);
 }
 
 /* Grid Areas Custom */
@@ -97,7 +119,7 @@ h1, h2, h3, h4, .font-heading {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: var(--surface-hover);
   border-radius: 10px;
 }
 
@@ -107,7 +129,7 @@ h1, h2, h3, h4, .font-heading {
 
 /* Utils */
 .text-gradient {
-  background: linear-gradient(135deg, #fff 0%, var(--accent-neon) 100%);
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-neon) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -123,7 +145,7 @@ h1, h2, h3, h4, .font-heading {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(135deg, var(--surface-color) 0%, #1a1a1a 100%);
+  background: linear-gradient(135deg, var(--surface-color) 0%, var(--bg-color) 100%);
   gap: 30px;
 }
 
@@ -137,38 +159,220 @@ h1, h2, h3, h4, .font-heading {
   justify-content: space-between;
   align-items: center;
   padding: 0 5%;
-  background: rgba(0, 0, 0, 0.8);
+  background: var(--bg-color);
+  opacity: 0.95;
   backdrop-filter: blur(10px);
   z-index: 1000;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .navbar__logo {
   font-size: 1.5rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .navbar__logo .highlight {
   color: var(--accent-neon);
 }
 
-.navbar__links {
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.desktop-only-toggles {
+  display: flex;
+  gap: 15px;
+}
+
+.toggle-group {
+  display: flex;
+  gap: 5px;
+}
+
+.mobile-toggle-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 5px;
+  transition: transform 0.3s ease;
+}
+
+.mobile-toggle-btn:hover {
+  color: var(--accent-neon);
+}
+
+.rotating {
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.navbar__dropdown {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  background: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+
+.navbar__dropdown.is-open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdown-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dropdown-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+}
+
+.toggle-group-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.toggle-group-vertical .toggle-btn {
+  width: 100%;
+  padding: 12px;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+.desktop-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.navbar__links-desktop {
   display: flex;
   list-style: none;
   gap: 30px;
 }
 
-.navbar__links a {
+.navbar__links-desktop a {
   text-decoration: none;
-  color: #fff;
+  color: var(--text-primary);
   font-size: 0.9rem;
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
+.navbar__links-desktop a:hover {
+  color: var(--accent-neon);
+}
+
+.navbar__links {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 15px;
+}
+
+.navbar__links a {
+  text-decoration: none;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
 .navbar__links a:hover {
   color: var(--accent-neon);
+}
+
+
+@media (max-width: 900px) {
+  .desktop-only-toggles, .desktop-links {
+    display: none;
+  }
+
+  .mobile-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .navbar {
+    padding: 0 20px;
+  }
+
+  .navbar__logo {
+    font-size: 1.2rem;
+  }
+}
+
+/* ---------- Hamburger toggle (desktop: oculto) ---------- */
+.navbar__toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 4px;
+}
+
+/* Contact Form Styles */
+.contact-form-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.contact-form-container input, 
+.contact-form-container textarea {
+  width: 100%;
+  padding: 12px;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+}
+
+.contact-form-container button {
+  grid-column: span 2;
+  padding: 12px;
+  background: var(--accent-neon);
+  color: var(--bg-color);
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.contact-form-container button:hover {
+  opacity: 0.8;
 }
 
 .btn-contact {
@@ -183,60 +387,41 @@ h1, h2, h3, h4, .font-heading {
 
 .btn-contact:hover {
   background: var(--accent-neon);
-  color: #000;
+  color: var(--bg-color);
 }
 
-
-/* ---------- Responsividade ---------- */
-@media (max-width: 768px) {
-  .hero-card {
-    flex-direction: column-reverse;
-    text-align: center;
-  }
-
-  .hero-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  /* Navbar mobile: mostrar toggle, esconder links */
-  .navbar__toggle {
-    display: block;
-  }
-
-  .navbar__links {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 20px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .navbar__links.is-open {
-    display: flex;
-  }
-
-  .navbar__links li a {
-    padding: 12px 0;
-    font-size: 1rem;
-  }
+.btn-contact-mobile {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  text-align: center;
+  background: var(--accent-neon);
+  color: var(--bg-color);
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 700;
+  margin-top: 10px;
 }
 
-/* ---------- Hamburger toggle (desktop: oculto) ---------- */
-.navbar__toggle {
-  display: none;
+.toggle-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.toggle-btn {
   background: none;
-  border: none;
-  color: #fff;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 4px 8px;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 1.5rem;
-  padding: 4px;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.toggle-btn.active {
+  background: var(--accent-neon);
+  color: var(--bg-color);
+  border-color: var(--accent-neon);
 }

@@ -1,13 +1,15 @@
 import React from 'react';
 import { motion } from "framer-motion";
+import { useLanguage } from '../context/LanguageContext';
 
 function Education({ lista }) {
+  const { t } = useLanguage();
   if (!lista || lista.length === 0) return null;
 
   return (
     <section className="education-section" style={{ marginTop: '80px' }}>
-      <h2 className="font-heading" style={{ fontSize: '2rem', marginBottom: '40px' }}>
-        <span className="text-gradient">Formação Acadêmica</span>
+      <h2 className="font-heading" style={{ fontSize: '2rem', marginBottom: '40px', color: 'var(--text-primary)' }}>
+        {t('edu_title')}
       </h2>
       
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px' }}>

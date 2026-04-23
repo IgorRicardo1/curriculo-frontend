@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Code2, Cpu, Eye, Smartphone, Layout, Database, Sparkles, X } from "lucide-react";
 import { SiGithub } from "react-icons/si";
+import { useLanguage } from "../context/LanguageContext";
 
 const MockupWindow = ({ children, aspectRatio = "16/10", label = "Project Preview" }) => (
-    <div style={{ 
-        overflow: 'hidden', 
-        borderRadius: '12px', 
-        background: '#1a1a1a',
+    <div style={{
+        overflow: 'hidden',
+        borderRadius: '12px',
+        background: 'var(--bg-color)',
         border: '1px solid var(--border-color)',
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+        boxShadow: '0 25px 50px -12px var(--accent-glow)',
         position: 'relative',
         width: '100%'
     }}>
-        <div style={{ 
-            height: '25px', 
-            background: 'rgba(255,255,255,0.05)', 
+        <div style={{
+            height: '25px',
+            background: 'var(--surface-color)',
             borderBottom: '1px solid var(--border-color)',
             display: 'flex',
             alignItems: 'center',
@@ -37,6 +38,7 @@ const MockupWindow = ({ children, aspectRatio = "16/10", label = "Project Previe
 
 
 function Projects({ lista }) {
+    const { t } = useLanguage();
     const formatLink = (link) => {
         if (!link) return "#";
         return link.startsWith('http') ? link : `https://${link}`;
@@ -49,16 +51,16 @@ function Projects({ lista }) {
     return (
         <section id="projects" style={{ marginTop: '120px' }}>
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 0 }}
+                whileInView={{ opacity: 1, y: 1 }}
                 viewport={{ once: true }}
                 style={{ textAlign: 'center', marginBottom: '80px' }}
             >
-                <h2 className="font-heading" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', fontWeight: '900', letterSpacing: '-3px', textTransform: 'uppercase' }}>
-                    <span className="text-gradient">Selected Works</span>
+                <h2 className="font-heading" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', fontWeight: '900', letterSpacing: '-3px', textTransform: 'uppercase', color: 'var(--text-primary)' }}>
+                    {t('projects_title')}
                 </h2>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '600px', margin: '20px auto' }}>
-                    Explorando as fronteiras entre engenharia robusta e design intuitivo.
+                    {t('projects_subtitle')}
                 </p>
             </motion.div>
 
@@ -66,9 +68,9 @@ function Projects({ lista }) {
                 {lista.map((projeto, index) => (
                     <div key={projeto.id} style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
                         {/* Narrative Grid */}
-                        <div style={{ 
-                            display: 'grid', 
-                            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+                        <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
                             gap: '40px',
                             marginTop: '20px'
                         }}>
@@ -85,11 +87,11 @@ function Projects({ lista }) {
                                 </div>
                                 <div className="tags-container" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '25px' }}>
                                     {projeto.tags && projeto.tags.split(',').map((tag, i) => (
-                                        <span key={i} style={{ 
-                                            fontSize: '0.65rem', 
-                                            padding: '4px 12px', 
-                                            background: 'rgba(0, 229, 255, 0.05)', 
-                                            border: '1px solid rgba(0, 229, 255, 0.2)',
+                                        <span key={i} style={{
+                                            fontSize: '0.65rem',
+                                            padding: '4px 12px',
+                                            background: 'var(--accent-glow)',
+                                            border: '1px solid var(--border-color)',
                                             color: 'var(--accent-neon)',
                                             borderRadius: '100px',
                                             fontWeight: '700',
@@ -124,28 +126,28 @@ function Projects({ lista }) {
                                 transition={{ delay: 0.4 }}
                                 style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}
                             >
-                                <div className="bento-card" style={{ padding: '24px', background: 'rgba(255,255,255,0.02)' }}>
+                                <div className="bento-card" style={{ padding: '24px', background: 'var(--accent-glow)' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--accent-neon)', marginBottom: '10px' }}>
                                         <Code2 size={18} />
-                                        <span style={{ fontSize: '0.8rem', fontWeight: '800', textTransform: 'uppercase' }}>O Desafio</span>
+                                        <span style={{ fontSize: '0.8rem', fontWeight: '800', textTransform: 'uppercase' }}>{t('projects_challenge')}</span>
                                     </div>
                                     <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                                         {projeto.desafio || "Desenvolvimento de uma solução técnica complexa focada em performance e usabilidade."}
                                     </p>
                                 </div>
-                                <div className="bento-card" style={{ padding: '24px', background: 'rgba(255,255,255,0.02)' }}>
+                                <div className="bento-card" style={{ padding: '24px', background: 'var(--accent-glow)' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--accent-neon)', marginBottom: '10px' }}>
                                         <Cpu size={18} />
-                                        <span style={{ fontSize: '0.8rem', fontWeight: '800', textTransform: 'uppercase' }}>A Engenharia</span>
+                                        <span style={{ fontSize: '0.8rem', fontWeight: '800', textTransform: 'uppercase' }}>{t('projects_engineering')}</span>
                                     </div>
                                     <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                                         {projeto.engenharia || "Uso de padrões de projeto modernos para garantir escalabilidade e manutenção eficiente."}
                                     </p>
                                 </div>
-                                <div className="bento-card" style={{ padding: '24px', background: 'rgba(255,255,255,0.02)' }}>
+                                <div className="bento-card" style={{ padding: '24px', background: 'var(--accent-glow)' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--accent-neon)', marginBottom: '10px' }}>
                                         <Sparkles size={18} />
-                                        <span style={{ fontSize: '0.8rem', fontWeight: '800', textTransform: 'uppercase' }}>Diferencial</span>
+                                        <span style={{ fontSize: '0.8rem', fontWeight: '800', textTransform: 'uppercase' }}>{t('projects_diff')}</span>
                                     </div>
                                     <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                                         {projeto.diferencial || "Entrega de uma experiência de usuário excepcional com foco em detalhes e fluidez."}
@@ -162,37 +164,37 @@ function Projects({ lista }) {
                             transition={{ duration: 1 }}
                         >
                             <MockupWindow label={`${projeto.titulo} // Main View`}>
-                                <img 
-                                    src={projeto.imagem_url} 
-                                    alt={projeto.titulo} 
+                                <img
+                                    src={projeto.imagem_url}
+                                    alt={projeto.titulo}
                                     onClick={() => setImagemAmpliada(projeto.imagem_url)}
-                                    style={{ width: '100%', height: '100%', objectFit: 'contain', background: '#0a0a0a', cursor: 'zoom-in' }}
+                                    style={{ width: '100%', height: '100%', objectFit: 'contain', background: 'var(--bg-color)', cursor: 'zoom-in' }}
                                 />
                             </MockupWindow>
                         </motion.div>
 
                         {/* Gallery */}
                         {projeto.galeria_urls && projeto.galeria_urls.filter(url => url !== projeto.imagem_url).length > 0 && (
-                            <div style={{ 
-                                display: 'grid', 
-                                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+                            <div style={{
+                                display: 'grid',
+                                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
                                 gap: '20px',
                                 marginTop: '20px'
                             }}>
                                 {projeto.galeria_urls.filter(url => url !== projeto.imagem_url).map((url, i) => (
-                                    <motion.div 
+                                    <motion.div
                                         key={i}
                                         initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: 0.2 + (i * 0.1) }}
                                     >
-                                        <MockupWindow aspectRatio="16/9" label={`View 0${i+1}`}>
-                                            <img 
-                                                src={url} 
-                                                alt={`Gallery ${i}`} 
+                                        <MockupWindow aspectRatio="16/9" label={`View 0${i + 1}`}>
+                                            <img
+                                                src={url}
+                                                alt={`Gallery ${i}`}
                                                 onClick={() => setImagemAmpliada(url)}
-                                                style={{ width: '100%', height: '100%', objectFit: 'contain', background: '#0a0a0a', cursor: 'zoom-in' }} 
+                                                style={{ width: '100%', height: '100%', objectFit: 'contain', background: 'var(--bg-color)', cursor: 'zoom-in' }}
                                             />
                                         </MockupWindow>
                                     </motion.div>
@@ -207,7 +209,7 @@ function Projects({ lista }) {
 
             <AnimatePresence>
                 {imagemAmpliada && (
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -224,7 +226,7 @@ function Projects({ lista }) {
                             cursor: 'zoom-out'
                         }}
                     >
-                        <button 
+                        <button
                             onClick={(e) => { e.stopPropagation(); setImagemAmpliada(null); }}
                             style={{
                                 position: 'absolute',
@@ -238,12 +240,12 @@ function Projects({ lista }) {
                         >
                             <X size={32} />
                         </button>
-                        <motion.img 
+                        <motion.img
                             initial={{ scale: 0.8 }}
                             animate={{ scale: 1 }}
                             exit={{ scale: 0.8 }}
-                            src={imagemAmpliada} 
-                            alt="Ampliada" 
+                            src={imagemAmpliada}
+                            alt="Ampliada"
                             style={{
                                 maxWidth: '100%',
                                 maxHeight: '100%',

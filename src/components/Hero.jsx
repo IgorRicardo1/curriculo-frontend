@@ -1,8 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { SiLinkedin, SiGithub } from "react-icons/si";
+import { useLanguage } from "../context/LanguageContext";
 
 function Hero({ nome, titulo, resumo_curto, linkedin, github, foto, className }) {
+    const { t } = useLanguage();
     const formatLink = (link) => {
         if (!link) return "#";
         return link.startsWith('http') ? link : `https://${link}`;
@@ -10,10 +12,12 @@ function Hero({ nome, titulo, resumo_curto, linkedin, github, foto, className })
 
     const getGreeting = () => {
         const hour = new Date().getHours();
-        if (hour >= 5 && hour < 12) return "Bom dia";
-        if (hour >= 12 && hour < 18) return "Boa tarde";
-        return "Boa noite";
+        if (hour >= 5 && hour < 12) return language === 'en' ? "Good morning" : language === 'es' ? "Buenos días" : "Bom dia";
+        if (hour >= 12 && hour < 18) return language === 'en' ? "Good afternoon" : language === 'es' ? "Buenas tardes" : "Boa tarde";
+        return language === 'en' ? "Good evening" : language === 'es' ? "Buenas noches" : "Boa noite";
     };
+
+    const { language } = useLanguage();
 
     return (
         <motion.div 
@@ -39,8 +43,8 @@ function Hero({ nome, titulo, resumo_curto, linkedin, github, foto, className })
                 </motion.span>
                 
                 <h1 className="font-heading" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', lineHeight: '1.1', margin: '15px 0' }}>
-                    {getGreeting()}, eu sou <br />
-                    <span className="text-gradient" style={{ fontWeight: '800' }}>{nome}</span>
+                    {getGreeting()}, {t('hero_greeting')} <br />
+                    <span style={{ fontWeight: '800', color: 'var(--text-primary)' }}>{nome}</span>
                 </h1>
                 
                 <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', maxWidth: '400px', marginBottom: '30px', lineHeight: '1.5' }}>

@@ -25,8 +25,17 @@ const router = createBrowserRouter([
   },
 ]);
 
+import { ThemeProvider } from './context/ThemeContext';
+import { LanguageProvider } from './context/LanguageContext';
+
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ThemeProvider>
+      <LanguageProvider>
+        <RouterProvider router={router} />
+      </LanguageProvider>
+    </ThemeProvider>
+  );
 }
 
 export default App;
